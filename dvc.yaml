@@ -1,0 +1,42 @@
+stages:
+  clean_data:
+    cmd: python clean_data.py iris.csv data/cleaned.csv
+    deps:
+    - clean_data.py
+    - iris.csv
+    outs:
+    - data/cleaned.csv
+  scale_data:
+    cmd: python scale_data.py data/cleaned.csv data/scaled.csv
+    deps:
+    - data/cleaned.csv
+    - scale_data.py
+    outs:
+    - data/scaled.csv
+  train_scaled:
+    cmd: python train.py data/scaled.csv model/model_scaled.pkl metrics/metrics_scaled.json
+    deps:
+    - data/scaled.csv
+    - train.py
+    outs:
+    - model/model_scaled.pkl
+    metrics:
+    - metrics/metrics_scaled.json:
+        cache: false
+  feature_select:
+    cmd: python feature_select.py data/cleaned.csv data/selected.csv
+    deps:
+    - data/cleaned.csv
+    - feature_select.py
+    outs:
+    - data/selected.csv
+  train_selected:
+    cmd: python train.py data/selected.csv model/model_selected.pkl metrics/metrics_selected.json
+    deps:
+    - data/selected.csv
+    - train.py
+    outs:
+    - model/model_selected.pkl
+    metrics:
+    - metrics/metrics_selected.json:
+        cache: false
