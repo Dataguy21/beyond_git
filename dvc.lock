@@ -1,0 +1,90 @@
+schema: '2.0'
+stages:
+  clean_data:
+    cmd: python clean_data.py iris.csv data/cleaned.csv
+    deps:
+    - path: clean_data.py
+      hash: md5
+      md5: da602a918e94aea809d817a42c3dd448
+      size: 204
+    - path: iris.csv
+      hash: md5
+      md5: 04ed69383af337e9dabf934cbc8abc11
+      size: 3858
+    outs:
+    - path: data/cleaned.csv
+      hash: md5
+      md5: ec60511f79ed538c405093857c163b89
+      size: 3934
+  scale_data:
+    cmd: python scale_data.py data/cleaned.csv data/scaled.csv
+    deps:
+    - path: data/cleaned.csv
+      hash: md5
+      md5: ec60511f79ed538c405093857c163b89
+      size: 3934
+    - path: scale_data.py
+      hash: md5
+      md5: 1a02287f9927dc5ff2282ac30218ed86
+      size: 464
+    outs:
+    - path: data/scaled.csv
+      hash: md5
+      md5: 46b3228736f95aea2a357ad2b2064107
+      size: 13059
+  feature_select:
+    cmd: python feature_select.py data/cleaned.csv data/selected.csv
+    deps:
+    - path: data/cleaned.csv
+      hash: md5
+      md5: ec60511f79ed538c405093857c163b89
+      size: 3934
+    - path: feature_select.py
+      hash: md5
+      md5: 6341a30073a9914866850d228fd6283f
+      size: 536
+    outs:
+    - path: data/selected.csv
+      hash: md5
+      md5: be8cd082695559d91c6a64c2c43f32b0
+      size: 2733
+  train_selected:
+    cmd: python train.py data/selected.csv model/model_selected.pkl metrics/metrics_selected.json
+    deps:
+    - path: data/selected.csv
+      hash: md5
+      md5: be8cd082695559d91c6a64c2c43f32b0
+      size: 2733
+    - path: train.py
+      hash: md5
+      md5: ee03645a87d9cdba3e3aeb6387d7d426
+      size: 1809
+    outs:
+    - path: metrics/metrics_selected.json
+      hash: md5
+      md5: f7dcf40e624ba322e979eefca1362062
+      size: 150
+    - path: model/model_selected.pkl
+      hash: md5
+      md5: fc1f25b97b8a97e5d6641f84535d8756
+      size: 1327
+  train_scaled:
+    cmd: python train.py data/scaled.csv model/model_scaled.pkl metrics/metrics_scaled.json
+    deps:
+    - path: data/scaled.csv
+      hash: md5
+      md5: 46b3228736f95aea2a357ad2b2064107
+      size: 13059
+    - path: train.py
+      hash: md5
+      md5: ee03645a87d9cdba3e3aeb6387d7d426
+      size: 1809
+    outs:
+    - path: metrics/metrics_scaled.json
+      hash: md5
+      md5: 3bb6b5e23c5e8aa0b89c77876f2bccf5
+      size: 150
+    - path: model/model_scaled.pkl
+      hash: md5
+      md5: 6bf17ea2a5efa93af0b7c3a6f8e8349c
+      size: 1407

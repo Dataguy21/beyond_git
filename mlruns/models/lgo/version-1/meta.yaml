@@ -1,0 +1,14 @@
+aliases: []
+creation_timestamp: 1747302423253
+current_stage: None
+description: ''
+last_updated_timestamp: 1747302423253
+name: lgo
+run_id: b9194359dff0461590d6c82b124e797b
+run_link: ''
+source: file:///C:/DSE/Knowledge%20sharing/15th%20May%202025%20-%20Version%20Control/beyond_git/mlruns/0/b9194359dff0461590d6c82b124e797b/artifacts/model
+status: READY
+status_message: null
+storage_location: file:///C:/DSE/Knowledge%20sharing/15th%20May%202025%20-%20Version%20Control/beyond_git/mlruns/0/b9194359dff0461590d6c82b124e797b/artifacts/model
+user_id: null
+version: 1
